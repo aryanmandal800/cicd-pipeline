@@ -1,5 +1,5 @@
 name: Deploy cicd-pipeline to EC2
- 
+
 on:
   push:
     branches:
@@ -10,13 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: SSH into EC2 and Deploy
+      - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script_stop: true
           script: |
+            whoami
+            hostname
+
             cd /home/ubuntu/cicd-pipeline
             git pull origin main
 
