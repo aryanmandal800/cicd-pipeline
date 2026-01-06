@@ -22,7 +22,7 @@ async function startServer() {
     // console.log('✅ Database synchronized.');
 
     app.listen(PORT, () => {
-      console.log(`🚀 Server is running on port ${PORT}`);
+      console.log(`🚀 Server is running on portkk ${PORT}`);
     });
   } catch (error) {
     console.error('❌ Unable to connect to the database:', error);
