@@ -13,6 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 🔍 DEBUG STEP (temporary)
+      - name: Debug EC2_HOST
+        run: |
+          echo "HOST=[$EC2_HOST]"
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
@@ -23,6 +30,9 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            whoami
+            hostname
+
             cd /home/ubuntu/cicd-pipeline
             git pull origin main
 
