@@ -1,4 +1,4 @@
-name: Deploy cicd-pipeline to EC2 (Direct Build)
+name: Deploy cicd-pipeline to EC2
 
 on:
   push:
