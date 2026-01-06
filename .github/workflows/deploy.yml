@@ -13,23 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 🔍 DEBUG STEP (temporary)
-      - name: Debug EC2_HOST
-        run: |
-          echo "HOST=[$EC2_HOST]"
-        env:
-          EC2_HOST: ${{ secrets.EC2_HOST }}
-
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H 51.20.252.165 >> ~/.ssh/known_hosts
 
       - name: Deploy to EC2
         run: |
-          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+          ssh ubuntu@51.20.252.165 << 'EOF'
             whoami
             hostname
 
