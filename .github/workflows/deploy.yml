@@ -1,5 +1,5 @@
 name: Deploy cicd-pipeline to EC2
- 
+
 on:
   push:
     branches:
@@ -10,15 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy via SSH
+      - name: Test SSH Key Injection and Deploy
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.EC2_SSH_KEY }}
           port: 22
+          debug: true
           script_stop: true
           script: |
+            echo "SSH OK"
             whoami
             hostname
 
